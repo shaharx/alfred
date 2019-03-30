@@ -1,0 +1,21 @@
+{
+  "name": "art",
+  "version": "1.0.0",
+  "description": "",
+  "main": "art.js",
+  "bin": {
+    "art": "./bin/art.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "adm-zip": "^0.4.13",
+    "commander": "^2.19.0",
+    "request": "^2.88.0",
+    "request-progress": "^3.0.0"
+  }
+}
