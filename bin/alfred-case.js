@@ -9,7 +9,8 @@ program
     .option('-n, --new-case <caseNumber>', 'Creates a new case environment. Passing a case number as an argument is mandatory')
     .option('-v, --version <version>', 'Setup a specific version of Artifactory', 'latest')
     .action(()=>{
-        manager should perform all the checks prior to continuing the case.
+        console.log('case');
+        // manager should perform all the checks prior to continuing the case.
         caseManager.createCase(program.newCase, program.version);
     });
 
