@@ -5,7 +5,7 @@ const pkg = require('../package.json');
 
 program
     .version(pkg.version)
-    .command('case', 'creates a case or modifies an exsiting one')
+    .command('case', 'case management module')
     .parse(process.argv);
 
 if(!process.argv.slice(2).length){
