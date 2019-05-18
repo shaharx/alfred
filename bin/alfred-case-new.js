@@ -1,4 +1,5 @@
 const manager = require('../lib/manager')
+const storageManager = require('../lib/storageManager')
 const fs = require('fs')
 const program = require('commander')
 const { exec } = require('child_process')
@@ -32,22 +33,24 @@ program
             process.exit();
         }
 
+        storageManager.getVersion(`${directories.versions_archive}/jfrog-artifactory-pro-${instanceProperties.instance_version}.zip`)
+
         const versionFile = `${directories.versions_archive}/jfrog-artifactory-pro-${instanceProperties.instance_version}.zip`;
-        if (!fs.existsSync(versionFile)) {
-            console.log('file does not exist, downloading new one');
-            dl.downloadArt(instanceProperties.instance_version, directories.versions_archive);
-            // process.exit()
-        } else {
-            unzipper.unzip(versionFile, `${instanceProperties.instance_home}`);
-            console.log(`${instance_home}`);
-            fs.renameSync(`${instance_home}/artifactory-pro-${instanceProperties.instance_version}`, `${instance_home}/artifactory`)
-            exec(`chmod +x ${instanceProperties.instance_home}/bin/*`, (err, stdout, stderr) => {
-                if (err) {
-                    return err;
-                }
-            });
-            console.log(`Instance ready. Run \'. ${instanceProperties.instance_home}/bin/artifactory.sh\' to start`);
-        }
+        // if (!fs.existsSync(versionFile)) {
+        //     console.log('file does not exist, downloading new one');
+        //     dl.downloadArt(instanceProperties.instance_version, directories.versions_archive);
+        //     // process.exit()
+        // } else {
+        //     unzipper.unzip(versionFile, `${instanceProperties.instance_home}`);
+        //     console.log(`${instance_home}`);
+        //     fs.renameSync(`${instance_home}/artifactory-pro-${instanceProperties.instance_version}`, `${instance_home}/artifactory`)
+        //     exec(`chmod +x ${instanceProperties.instance_home}/bin/*`, (err, stdout, stderr) => {
+        //         if (err) {
+        //             return err;
+        //         }
+        //     });
+        //     console.log(`Instance ready. Run \'. ${instanceProperties.instance_home}/bin/artifactory.sh\' to start`);
+        // }
     });
 
 program.parse(process.argv);
