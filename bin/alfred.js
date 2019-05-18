@@ -5,8 +5,9 @@ const pkg = require('../package.json');
 
 program
     .version(pkg.version)
+    .command('deploy', 'deploy Artifactory')
     .command('case', 'case management module')
-    .parse(process.argv);
+    .parse(process.argv)
 
 if(!process.argv.slice(2).length){
     //program.outputHelp();

@@ -1,21 +1,16 @@
-const fs = require('fs');
-const program = require('commander');
-const { exec } = require('child_process');
-const dl = require('../lib/downloader');
-const unzipper = require('../lib/unzipper');
-
-const alfredHome = `${require("os").userInfo().homedir}/.alfred`;
-const directories = {
-    cases_path: `${alfredHome}/cases`,
-    versions_archive: `${alfredHome}/versions_archive`
-}
+const manager = require('../lib/manager')
+const fs = require('fs')
+const program = require('commander')
+const { exec } = require('child_process')
+const dl = require('../lib/downloader')
+const unzipper = require('../lib/unzipper')
 
 program
     .option('-n, --name <name>', 'the number or name of a case environment')
     .option('-v, --artVersion <artVersion>', 'the Artifactory version to deploy')
     .option('-d, --description <description>', 'case issue description. should be wrapped in quotations')
     .action(() => {
-        checkDirectries();
+        manager.getDirectories()
         console.log('creating a new case');
         var caseProperties = {
             case_name: program.name,
@@ -56,13 +51,3 @@ program
     });
 
 program.parse(process.argv);
-
-function checkDirectries() {
-    console.log("Checking directories");
-    for (var path in directories) {
-        if (!fs.existsSync(directories[path])) {
-            fs.mkdirSync(directories[path], { recursive: true });
-            console.log(`${directories[path]} was not found, a new one was created.`);
-        }
-    }
-}
