@@ -15,7 +15,7 @@ program
         }
         if (!program.dir) { console.log(`No path was specified, using ${dir} by default`) }
         else { if (program.dir[0] != '/') { dir += `/${program.dir}` } }
-        storageManager.getVersion(program.artVersion, program.dir)
+        storageManager.getVersion(program.artVersion, dir)
     })
 
 if (!process.argv.slice(2).length) {
