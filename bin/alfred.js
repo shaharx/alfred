@@ -6,7 +6,9 @@ const pkg = require('../package.json');
 program
     .version(pkg.version)
     .command('deploy', 'deploy Artifactory')
-    .command('case', 'case management module')
+    .command('start', 'start Artifactory')
+    .command('stop', 'stop Artifactory')
+    .command('case', 'case management module - Not funtional yet')
     .parse(process.argv)
 
 if(!process.argv.slice(2).length){

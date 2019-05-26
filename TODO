@@ -1,2 +1,3 @@
 Make a prompt once a deploy is done to allow the user to start/start in background/don't start
 Create alfred upgrade with a version validator
+Make the unzipper determine wether it is a deploy or and upgrade with object parameter that has keys or not.
