@@ -5,7 +5,7 @@ const pkg = require('../package.json')
 
 program
     .version(pkg.version)
-    .option('-v, --artVersion <artVersion>', 'the Artifactory version to deploy kaka')
+    .option('-v, --artVersion <artVersion>', 'the Artifactory version to deploy')
     .option('-d, --dir [dir]', 'the path to deploy Artifactory to. current working directory by default')
     .action(() => {
         var dir = process.cwd()
