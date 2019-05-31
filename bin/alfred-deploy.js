@@ -9,17 +9,16 @@ program
     .option('-v, --artVersion <artVersion>', 'the Artifactory version to deploy')
     .option('-d, --dir [dir]', 'the path to deploy Artifactory to. current working directory by default')
     .action(() => {
+        var currentDirectory = !program.dir ? process.cwd() : program.dir[0] != '/' ? process.cwd()+'/'+program.dir : program.dir
         var parameters = {
             version: program.artVersion,
-            dir: process.cwd(),
+            dir: currentDirectory,
             state: 'deploy'
         }
         if (!program.version) {
-            console.log('Not version was specified. This is not docker and there is no default latest tag')
+            console.log('No version was specified. This is not docker and there is no default latest tag')
             return
         }
-        if (!parameters.dir) { console.log(`No path was specified, using ${parameters.dir} by default`) }
-        else if (parameters.dir[0] != '/') { parameters.dir += `/${program.dir}` }
 
         storageManager.getVersion(parameters)
     })
