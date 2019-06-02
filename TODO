@@ -1,5 +1,2 @@
-Create alfred upgrade with a version validator
-Make the unzipper determine wether it is a deploy or and upgrade with object parameter that has keys or not.
-Add the option to set a pre-defined path of a server to work with so there will not be a constraint of working only from the directory
 Fix the start and stop options to point to the path of the server - simply change the '.' of the start of the path to the absolute directory
-A
+See to change the parameters.dir to other name with no verstion

@@ -16,11 +16,8 @@ program
             dir: currentDirectory,
             state: 'upgrade'
         }
-        console.log('--------' + parameters.dir)
 
         var currentVersion = manager.getInstanceMetadata(parameters.dir)
-
-        console.log(currentVersion)
 
         const versionChecker = require('../lib/versionCheck')
         if (!program.version) {
