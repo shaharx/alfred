@@ -1,2 +1,4 @@
 Fix the start and stop options to point to the path of the server - simply change the '.' of the start of the path to the absolute directory
 See to change the parameters.dir to other name with no verstion
+Check why cannot upgrade from 6.9.1 to 6.10.1. Earlier version?
+Fix the prompt start issue
