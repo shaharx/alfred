@@ -8,7 +8,7 @@ program
     .option('-p, --path [dir]', 'the upgrade Artifactory path. current working directory by default')
     .option('-i, --increment <number>', 'the value to increment the default port values with. 0 by default duh')
     .action(() => {
-        const path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
+        var path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
         if(path == ''){
             console.log('No default server path found, please set it or use the -p flag to work from a specific directory')
             process.exit()

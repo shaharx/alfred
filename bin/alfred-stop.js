@@ -8,11 +8,12 @@ program
     .description('Stop Artifactory')
     .option('-p, --path [path]', 'run the command on the current directory instead of the default server. Should be run from Artifactory home directory', '')
     .action(() => {
-        const path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
+        var path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
         if(path == ''){
             console.log('No default server path found, please set it or use the -p flag to work from a specific directory')
             process.exit()
         }
+        path = path[0] != '/' ? `${process.cwd()}/${path}` : path
         const execCallback = (err, stdout, stderr) => {
             if (err) { console.log('ERROR:\n' + err) }
             if (stdout) { console.log('STDOUT:\n' + stdout) }

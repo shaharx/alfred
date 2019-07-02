@@ -10,7 +10,12 @@ program
     .option('-v, --artVersion <artVersion>', 'the Artifactory version to upgrade to')
     .option('-p, --path [path]', 'the upgrade Artifactory path. current working directory by default')
     .action(() => {
-        var currentDirectory = !program.path ? process.cwd() : program.path[0] != '/' ? process.cwd() + '/' + program.path : program.path
+        var path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
+        if(path == ''){
+            console.log('No default server path found, please set it or use the -p flag to work from a specific directory')
+            process.exit()
+        }
+        path = path[0] != '/' ? `${process.cwd()}/${path}` : path
         var parameters = {
             version: program.artVersion,
             path: currentDirectory,

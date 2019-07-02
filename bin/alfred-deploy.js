@@ -7,14 +7,16 @@ const path = require('path')
 program
     .version(pkg.version)
     .option('-v, --artVersion <artVersion>', 'the Artifactory version to deploy')
-    .option('-d, --dir [dir]', 'the path to deploy Artifactory to. current working directory by default')
+    .option('-p, --path [path]', 'the path to deploy Artifactory to. current working directory by default')
     .action(() => {
-        var currentDirectory = !program.dir ? process.cwd() : program.dir[0] != '/' ? process.cwd()+'/'+program.dir : program.dir
+        fix the deploy issue with the path undefined error
+        var currentDirectory = !program.path ? process.cwd() : program.path[0] != '/' ? process.cwd()+'/'+program.path : program.path
         var parameters = {
             version: program.artVersion,
-            dir: currentDirectory,
+            path: currentDirectory,
             state: 'deploy'
         }
+        console.log(currentDirectory.path)
         if (!program.version) {
             console.log('No version was specified. This is not docker and there is no default latest tag')
             return
