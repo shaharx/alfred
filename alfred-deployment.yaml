@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alfred-deployment
+  labels:
+    app: alfred
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: alfred
+  template:
+    metadata:
+      labels:
+        app: alfred 
+    spec:
+      containers:
+      - name: alfred
+        image: shaharl-k8s-docker-virtual.jfrog.io/alfred:1.0
+        ports:
+          - containerPort: 8081

@@ -3,7 +3,7 @@ const pkg = require('../package.json')
 const path = require('path')
 const fs = require('fs')
 
-const dbs = ['mysql', 'mssql', 'postgres', 'oracledb', 'mariadb']
+const dbs = ['mysql', 'postgres', 'mssql', 'oracledb', 'mariadb']
 
 program
     .version(pkg.version)
@@ -22,7 +22,8 @@ program
             case dbs[0]:
                 require('../misc/db/mysql').set(path)
                 break
-            case dbs[0]:
+            case dbs[1]:
+                require('../misc/db/postgres').set(path)
                 break
             case dbs[0]:
                 break

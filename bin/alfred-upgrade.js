@@ -18,7 +18,7 @@ program
         path = path[0] != '/' ? `${process.cwd()}/${path}` : path
         var parameters = {
             version: program.artVersion,
-            path: currentDirectory,
+            path: path,
             state: 'upgrade'
         }
 
