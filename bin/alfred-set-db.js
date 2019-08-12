@@ -36,7 +36,6 @@ program
             case dbs[4]:
                 break
         }
-        console.log()
     })
 
 if (!process.argv.slice(2).length) {
