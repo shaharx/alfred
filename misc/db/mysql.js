@@ -1,18 +1,25 @@
 const manager = require('../../lib/manager')
 const inquirer = require('inquirer')
+const dbSetup = require('./dbSetup')
 
-function set(path) {
-    const connector = 'mysql-connector-java-8.0.17.jar'
+function set(options) {
+    var defaultConnVer = '8.0.17'
     inquirer.prompt(requirements).then(answers => {
-        var dbFile =
+        dbFile =
             `type=mysql\n` +
             `driver=com.mysql.jdbc.Driver\n` +
             `url=jdbc:mysql://${answers.ip}:${answers.port}/${answers.database}?characterEncoding=UTF-8&elideSetAutoCommits=true&useSSL=false\n` +
             `username=${answers.username}\n` +
             `password=${answers.password}\n`
 
-        require('./dbSetup').setDB(path, dbFile, connector)
+        options.connector = `mysql-connector-java-${options.connVer ? options.connVer : defaultConnVer}.jar`
+        options.dbFile = dbFile
+        options.connectorUrl = `http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${options.connVer ? options.connVer : defaultConnVer}.zip`
+        console.log(options)
+
+        dbSetup.set(options)
     })
+
 }
 
 var requirements = [{

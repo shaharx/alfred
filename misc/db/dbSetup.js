@@ -1,14 +1,15 @@
 const fs = require('fs')
 const manager = require('../../lib/manager')
 
-function setDB (path, content, connector, connectorUrl) {
-    const connectorPath = `${manager.getDirectories.jdbc}/${connector}`
-    fs.writeFileSync(`${path}/etc/db.properties`, content)
+function set (options) {
+    const connectorPath = `${manager.getDirectories.jdbc}/${options.connector}`
+    fs.writeFileSync(`${options.path}/etc/db.properties`, options.dbFile)
     if(fs.existsSync(connectorPath)){
-        fs.copyFileSync(connectorPath, `${path}/tomcat/lib/${connector}`)
+        fs.copyFileSync(connectorPath, `${options.path}/tomcat/lib/${options.connector}`)
     } else {
-        finish this
+        console.log('connector does not exist. Tell the developer to add an option for me to download it')
+        fix this man
     }
 }
 
-module.exports = { setDB }
+module.exports = { set }
