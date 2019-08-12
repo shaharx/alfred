@@ -1,8 +1,7 @@
-const manager = require('../../lib/manager')
 const inquirer = require('inquirer')
-const dbSetup = require('./dbSetup')
+const dbSetup = require('../../lib/dbSetup')
 
-function set(options) {
+function setDB(options) {
     var defaultConnVer = '8.0.17'
     inquirer.prompt(requirements).then(answers => {
         dbFile =
@@ -12,12 +11,11 @@ function set(options) {
             `username=${answers.username}\n` +
             `password=${answers.password}\n`
 
-        options.connector = `mysql-connector-java-${options.connVer ? options.connVer : defaultConnVer}.jar`
+        options.connector = `mysql-connector-java-${options.connVer}.jar`
         options.dbFile = dbFile
-        options.connectorUrl = `http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${options.connVer ? options.connVer : defaultConnVer}.zip`
-        console.log(options)
-
-        dbSetup.set(options)
+        options.connectorUrl = `http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${options.connVer}.zip`
+        options.connectorArchive = `mysql-connector-java-${options.connVer}.zip`
+        dbSetup.setDB(options)
     })
 
 }
@@ -51,4 +49,4 @@ var requirements = [{
 
 
 
-module.exports = { set }
+module.exports = { setDB }

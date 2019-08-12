@@ -2,3 +2,4 @@ See to change the parameters.dir to other name with no version
 Fix the prompt start issue - needs further testing
 Make the upgrade use the default server path
 Make the path to server an argument without flag
+promisify exec commands
