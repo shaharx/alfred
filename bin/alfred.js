@@ -5,6 +5,7 @@ const pkg = require('../package.json');
 
 program
     .version(pkg.version)
+    .description('This is fantastic, you don\'t get it.')
     .command('deploy', 'deploy Artifactory')
     .command('upgrade', 'upgrade Artifactory')
     .command('start', 'start Artifactory')
@@ -13,6 +14,6 @@ program
     .command('set', 'change Artifactory configurations')
     .parse(process.argv)
 
-if(!process.argv.slice(2).length){
+if (!process.argv.slice(2).length) {
     //program.outputHelp();
 }

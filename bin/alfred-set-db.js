@@ -33,7 +33,7 @@ program
 
         switch (program.type) {
             case MYSQL:
-                options.connVer = program.connector ? program.connector : '8.0.17'
+                options.connVer = program.connector ? program.connector : '8.0.16'
                 require('../misc/db/mysql').setDB(options)
                 break
             case POSTGRESQL:

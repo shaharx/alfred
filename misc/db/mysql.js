@@ -2,7 +2,6 @@ const inquirer = require('inquirer')
 const dbSetup = require('../../lib/dbSetup')
 
 function setDB(options) {
-    var defaultConnVer = '8.0.17'
     inquirer.prompt(requirements).then(answers => {
         dbFile =
             `type=mysql\n` +
@@ -15,6 +14,7 @@ function setDB(options) {
         options.dbFile = dbFile
         options.connectorUrl = `http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${options.connVer}.zip`
         options.connectorArchive = `mysql-connector-java-${options.connVer}.zip`
+        options.downloadFile = `mysql-connector-java-${options.connVer}.zip`
         dbSetup.setDB(options)
     })
 

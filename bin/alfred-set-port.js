@@ -5,7 +5,7 @@ const fs = require('fs')
 
 program
     .version(pkg.version)
-    .option('-p, --path [dir]', 'the upgrade Artifactory path. current working directory by default')
+    .option('-p, --path [dir]', 'the upgrade Artifactory path. default server by default')
     .option('-i, --increment <number>', 'the value to increment the default port values with. 0 by default duh')
     .action(() => {
         var path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
