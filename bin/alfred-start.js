@@ -23,7 +23,7 @@ program
             exec(`${path}/bin/artifactory.sh start`, execCallback)
             console.log('Started successfully')
         } else {
-            console.log('Artifactory is already running. Consider stopping it first and then try again')
+            console.log(`Artifactory is already running. Consider stopping it first and then try again\nIf you know it is not running, remove ${path}run/artifactory.pid and try again`)
         }
     })
 

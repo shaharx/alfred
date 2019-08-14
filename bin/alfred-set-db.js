@@ -13,7 +13,7 @@ const MYSQL = 'mysql',
 program
     .version(pkg.version)
     .option('-p, --path [path]', 'the upgrade Artifactory path. current working directory by default')
-    .option('-c, --connector [conn]', 'The jdbc connector version that will be downloaded according to the db type.\nA default connector version will be downloaded if no version was specified')
+    .option('-c, --connectorVersion [conn]', 'The jdbc connector version that will be downloaded according to the db type.\nA default connector version will be downloaded if no version was specified')
     .option('-t, --type <type>', `set database from one of the following types:\n\t${MYSQL}\n\t${POSTGRESQL}\n\t${MSSQL}\n\t${ORACLEDB}\n\t${MARIADB}\n`)
     .action(() => {
         if (!program.type) {
@@ -33,11 +33,12 @@ program
 
         switch (program.type) {
             case MYSQL:
-                options.connVer = program.connector ? program.connector : '8.0.16'
+                options.connVer = program.connectorVersion ? program.connectorVersion : '8.0.16'
                 require('../misc/db/mysql').setDB(options)
                 break
             case POSTGRESQL:
-                require('../misc/db/POSTGRESQL').set(options)
+                options.connVer = program.connectorVersion ? program.connectorVersion : '9.4.1212'
+                require('../misc/db/postgres').setDB(options)
                 break
             case MSSQL:
                 break
