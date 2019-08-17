@@ -12,11 +12,11 @@ function setDB(options) {
             `password=${answers.password}\n`
 
         var dboptions = {
-            ip: answers.ip,
+            user: answers.dbusername,
+            host: answers.ip,
             port: answers.port,
-            username: answers.dbusername,
-            dbname: answers.databasename,
-            dbpassword: answers.dbpassword
+            database: answers.databasename,
+            password: answers.dbpassword
         }
         options.connector = `postgresql-${options.connVer}.jre6.jar`
         options.dbFile = dbFile
@@ -30,13 +30,7 @@ function setDB(options) {
 
 function runQueries(dboptions, queries) {
     const { Client } = require('pg')
-    const client = new Client({
-        user: dboptions.username,
-        host: dboptions.ip,
-        database: dboptions.dbname,
-        password: dboptions.dbpassword,
-        port: dboptions.port,
-    })
+    const client = new Client(dboptions)
     client.connect()
 
     client.query(queries[0], (err, res) => {
