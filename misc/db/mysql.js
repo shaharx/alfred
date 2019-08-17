@@ -15,6 +15,7 @@ function setDB(options) {
         options.connectorUrl = `http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${options.connVer}.zip`
         options.connectorArchive = `mysql-connector-java-${options.connVer}.zip`
         options.downloadFile = `mysql-connector-java-${options.connVer}.zip`
+        options.queries = [`CREATE DATABASE ${answers.database} CHARACTER SET utf8 COLLATE utf8_bin;`,`GRANT ALL on ${answers.database}.* TO '${answers.username}'@'%' IDENTIFIED BY '${answers.password}';`, `FLUSH PRIVILEGES;`]
         dbSetup.setDB(options)
     })
 

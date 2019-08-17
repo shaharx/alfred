@@ -2,5 +2,7 @@ Fix the prompt start issue - needs further testing
 Make the path to server an argument without flag
 promisify exec commands
 Add switch name from the default artifactory-pro-version to a custom one by manipulating the entry name from the zip
-Make alfred run the queries in the database
+Make alfred run the queries in the database - psql complete
 Chalk it
+Cannot upgrade from version 5.5.0 to 5.6.9 and above. why?
+Fix the upgrade change the server.xml back to default issue
