@@ -8,3 +8,8 @@ Fix the upgrade change the server.xml back to default
 make sure to not print passwords as in the database creation
 install licenses automatically
 Make the various inquirer modules have the option to skip console prompts and use defaults (predefined defaults object)
+modify the set port command to use xml2js
+make alfred set default server
+make all sub commands use the pathParser
+Make the upgrade save the server.xml file
+Make alfred get the loggers to the logback directory

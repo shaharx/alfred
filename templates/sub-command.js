@@ -4,10 +4,14 @@ const path = require('path')
 
 program
     .version(pkg.version)
-    .option('-v, --artVersion <artVersion>', 'the Artifactory version to deploy')
-    .option('-d, --dir [dir]', 'the path to deploy Artifactory to. current working directory by default')
+    .option('-p, --path [path]', 'the path to deploy Artifactory to. current working directory by default')
     .action(() => {
-        
+        var path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
+        if(path == ''){
+            console.log('No default server path found, please set it or use the -p flag to work from a specific directory')
+            process.exit()
+        }
+        path = path[0] != '/' ? `${process.cwd()}/${path}` : path
     })
 
 if (!process.argv.slice(2).length) {
