@@ -3,7 +3,6 @@ Make the path to server an argument without flag
 promisify exec commands
 Add switch name from the default artifactory-pro-version to a custom one by manipulating the entry name from the zip
 Chalk it
-Cannot upgrade from version 5.5.0 to 5.6.9 and above. why?
 Fix the upgrade change the server.xml back to default
 make sure to not print passwords as in the database creation
 install licenses automatically
@@ -13,3 +12,5 @@ make alfred set default server
 make all sub commands use the pathParser
 Make the upgrade save the server.xml file
 Make alfred get the loggers to the logback directory
+Make init command to create alfred home directories
+Consider to change all the logger/appenders snippets to one snippet instead of many files
