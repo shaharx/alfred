@@ -2,7 +2,7 @@
 > Alfred is a CLI app that controls standalone Artifactory server via the ARTIFACTORY_HOME directory.
 
 Using alfred you can deploy, upgrade and change configurations in Artifactory without the need to edit, copy, or download any configuration file. All is done using the alfred command.
-Using alfred makes it easier to deploy and maintain multiple artifactory servers for the different uses, it takes less space than other install types and any server that was deployed by alfred does not depend on it in order to work as with docker.
+Using alfred makes it easier to deploy and maintain multiple artifactory servers for different uses, it takes less space than other install types and any server that was deployed by alfred does not depend on it in order to work as with docker.
 
 ## Requirements
 
@@ -36,7 +36,7 @@ alfred deploy -v <x.x.x> -p
 ```
 
 After the deployment, there will be a prompt whether to set the deployed server as the default server or not.
-This means that for the following commands, if the -p (--path) flag will not be specified, the command will be executed on the default server as can be seen in the next section section
+This means that for the following commands, if the -p (--path) flag will not be specified, the command will be executed on the default server as can be seen in the next section
 
 ## Basic Usage
 
@@ -57,7 +57,7 @@ Note: all commands are run against the artifactory home directory. No need to sp
 
 ## Upgrading Artifactory
 
-To upgrade artifactory, the -v version flag need to be specified and the -p path flag is optional if a default server as was mentioned before
+To upgrade artifactory, the -v version flag needs to be specified and the -p path flag is optional if a default server is set as was mentioned before
 
 ```
 alfred upgrade -v <x.x.x>
@@ -71,8 +71,8 @@ To set an external database, the following command needs to be run:
 alfred set db -t mysql
 alfred set db -t mysql -p path/to/artifactory/home
 ```
-This will prompt you for the database settings such as ip, port etc...
-Setting the database will also and deploy (and download if was not cached already) the jdbc logger and will run the required inital queries on the database itself.
+This will prompt you for the database settings such as ip, port etc.
+Setting the database will also deploy (and download if was not cached already) the jdbc logger and will run the required inital queries on the database itself.
 You can specify a connector version to download using the -c flag or use default versions by not specifying anything.
 
 ## Adding loggers to the logback.xml file
@@ -84,8 +84,8 @@ If the logger has an apprender-ref key configured, alfred will add the correspon
 alfred logback add -n org.apache.http
 alfred logback add -n org.jfrog.storage.JdbcHelper -p artifactory-pro-6.11.6/
 ```
-When setting a logger, alfred will look for it in ${alfredHome}/tools/logback-snippets under the loggers directory or under the appenders directory if an one is needed.
-Until the loggers bundle will be available, the loggers need to be added to those directories manually under a file for each logger/appender snippet in the corresponding folder with the .xml extension
+When setting a logger, alfred will look for it in ${alfredHome}/tools/logback-snippets under the loggers directory or under the appenders directory if one is needed.
+Until the loggers bundle will be available, the loggers need to be added to those directories manually under a file for each logger/appender snippet in the corresponding folder with a .xml extension
 
 ## Setting custom ports
 
