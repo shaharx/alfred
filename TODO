@@ -15,4 +15,4 @@ Make alfred get the loggers to the logback directory
 Make init command to create alfred home directories
 Consider to change all the logger/appenders snippets to one snippet instead of many files
 Make logging system with a central class
-Solve the conflict between the loggers with the same name org.jfrog.storage.JdbcHelper
+Solve the conflict between the loggers with the same name org.jfrog.storage.JdbcHelper test adding additional appender-ref
