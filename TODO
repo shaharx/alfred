@@ -11,9 +11,9 @@ modify the set port command to use xml2js
 make alfred set default server
 make all sub commands use the pathParser
 Make the upgrade save the server.xml file
-Make alfred get the loggers to the logback directory
 Make init command to create alfred home directories
 Check if the appenders can stay without the loggers or remove them
 create alfred logback show to show the loggers and appenders in the logback.xml file
 Make the ability to change the logger level
 Make alfred info
+Make one url to alfred tools repository
