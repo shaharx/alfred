@@ -2,28 +2,24 @@ const fs = require('fs')
 const { exec } = require('child_process')
 const program = require('commander')
 const pkg = require('../package.json')
+const ls = require('../lib/log-system')
+const pathParser = require('../lib/pathParser')
 
 program
     .version(pkg.version)
     .description('Stop Artifactory')
     .option('-p, --path [path]', 'run the command on the current directory instead of the default server. Should be run from Artifactory home directory', '')
     .action(() => {
-        var path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
-        if(path == ''){
-            console.log('No default server path found, please set it or use the -p flag to work from a specific directory')
-            process.exit()
-        }
-        path = path[0] != '/' ? `${process.cwd()}/${path}` : path
+        path = pathParser.parse(program.path)
         const execCallback = (err, stdout, stderr) => {
-            if (err) { console.log('ERROR:\n' + err) }
-            if (stdout) { console.log('STDOUT:\n' + stdout) }
-            if (stderr) { console.log('STDERR:\n' + stderr) }
+            if (err) { ls.error('ERROR:\n' + err) }
+            if (stdout) { ls.log('STDOUT:\n' + stdout) }
+            if (stderr) { ls.error('STDERR:\n' + stderr) }
         }
         if (fs.existsSync(`${path}/run/artifactory.pid`)) {
             exec(`${path}/bin/artifactory.sh stop`, execCallback)
-            console.log('Stopped successfully')
         } else {
-            console.log('Artifactory is not running. Consider starting it first and then try again')
+            ls.log('Artifactory is not running. Consider starting it first and then try again')
         }
     })
 

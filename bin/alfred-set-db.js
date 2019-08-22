@@ -1,8 +1,7 @@
 const program = require('commander')
 const pkg = require('../package.json')
-const path = require('path')
-const fs = require('fs')
-const dbSetup = require('../lib/dbSetup')
+const ls = require('../lib/log-system')
+const pathParser = require('../lib/pathParser')
 
 const MYSQL = 'mysql',
     POSTGRESQL = 'postgresql',
@@ -17,15 +16,10 @@ program
     .option('-t, --type <type>', `set database from one of the following types:\n\t${MYSQL}\n\t${POSTGRESQL}\n\t${MSSQL}\n\t${ORACLEDB}\n\t${MARIADB}\n`)
     .action(() => {
         if (!program.type) {
-            console.error(`No database specified, please use the -t flag to do so`)
+            ls.error(`No database specified, please use the -t flag to do so`)
             process.exit()
         }
-        var path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
-        if (path == '') {
-            console.log('No default server path found, please set it or use the -p flag to work from a specific directory')
-            process.exit()
-        }
-        path = path[0] != '/' ? `${process.cwd()}/${path}` : path
+        path = pathParser.parse(program.path)
         var options = {
             type: program.type,
             path: path

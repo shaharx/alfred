@@ -3,6 +3,7 @@ const storageManager = require('../lib/storageManager')
 const program = require('commander')
 const pkg = require('../package.json')
 const path = require('path')
+const ls = require('../lib/log-system')
 
 program
     .version(pkg.version)
@@ -16,9 +17,9 @@ program
             path: currentDirectory,
             state: 'deploy'
         }
-        console.log(parameters.path)
+
         if (!program.version) {
-            console.log('No version was specified. This is not docker and there is no default latest tag')
+            ls.error('No version was specified. This is not docker and there is no default latest tag')
             process.exit()
         }
 

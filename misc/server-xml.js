@@ -1,10 +1,12 @@
+const ls = require('../lib/log-system')
+
 var xmlFile = (valueToIncrement) => {
     const server_port = 8015 + parseInt(valueToIncrement),
         artifactory_port = 8081 + parseInt(valueToIncrement),
         access_port = 8040 + parseInt(valueToIncrement),
         ajp_port = 8019 + parseInt(valueToIncrement)
 
-    console.log(`The following ports were set:\nArtifactory port: ${artifactory_port}\nAccess port: ${access_port}`)
+    ls.log(`The following ports will be set:\nArtifactory port: ${artifactory_port}\nAccess port: ${access_port}`)
 
     return `<Server port="${server_port}" shutdown="SHUTDOWN">
 

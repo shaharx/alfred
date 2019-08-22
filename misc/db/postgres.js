@@ -1,6 +1,7 @@
 const manager = require('../../lib/manager')
 const inquirer = require('inquirer')
 const dbSetup = require('./../../lib/dbSetup')
+const ls = require('../../lib/log-system')
 
 function setDB(options) {
     inquirer.prompt(requirements).then(answers => {
@@ -36,12 +37,12 @@ function runQueries(dboptions, queries) {
     client.query(queries[0], (err, res) => {
         client.query(queries[1], (err, res) => {
             client.query(queries[2], (err, res) => {
-                console.log(err ? err : `succesfully ran ${queries[2]}`)
+                err ? ls.error(err) : ls.success(`succesfully ran ${queries[2]}`)
                 client.end()
             })
-            console.log(err ? err : `succesfully ran ${queries[1]}`)
+            err ? ls.error(err) : ls.success(`succesfully ran ${queries[1]}`)
         })
-        console.log(err ? err : `succesfully ran ${queries[0]}`)
+        err ? ls.error(err) : ls.success(`succesfully ran ${queries[0]}`)
     })
 }
 

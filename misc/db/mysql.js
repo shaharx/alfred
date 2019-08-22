@@ -1,5 +1,6 @@
 const inquirer = require('inquirer')
 const dbSetup = require('../../lib/dbSetup')
+const ls = require('../../lib/log-system')
 
 function setDB(options) {
     inquirer.prompt(requirements).then(answers => {
@@ -30,7 +31,6 @@ function setDB(options) {
 }
 
 function runQueries(dboptions, queries) {
-    console.log(dboptions)
     var mysql = require('mysql')
     var con = mysql.createConnection(dboptions);
     con.connect(function (err) {
@@ -38,20 +38,20 @@ function runQueries(dboptions, queries) {
             con.query(queries[1], function (err, result) {
                 con.query(queries[2], function (err, result) {
                     if (err) throw err;
-                    console.log("Result: " + `succesfully ran ${queries[2]}`);
+                    ls.success("Result: " + `succesfully ran ${queries[2]}`);
                 con.end()
             });
             if (err) throw err;
-            console.log("Result: " + `succesfully ran ${queries[1]}`);
+            ls.success("Result: " + `succesfully ran ${queries[1]}`);
         });
         if (err) throw err;
-        console.log("Result: " + `succesfully ran ${queries[0]}`);
+        ls.success("Result: " + `succesfully ran ${queries[0]}`);
         });
         if (err) {
-            console.error('error connecting: ' + err.stack);
+            ls.error('error connecting:\n' + err.stack);
             return;
         }
-        console.log('connected as id ' + con.threadId);
+        ls.log('connected to the database as id ' + con.threadId);
     });
 }
 

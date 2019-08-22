@@ -3,19 +3,15 @@ const manager = require('../lib/manager')
 const storageManager = require('../lib/storageManager')
 const program = require('commander')
 const pkg = require('../package.json')
-const path = require('path')
+const ls = require('../lib/log-system')
+const pathParser = require('../lib/pathParser')
 
 program
     .version(pkg.version)
     .option('-v, --artVersion <artVersion>', 'the Artifactory version to upgrade to')
     .option('-p, --path [path]', 'the upgrade Artifactory path. current working directory by default')
     .action(() => {
-        var path = program.path ? program.path : require('../lib/manager').getDefaultServerPath()
-        if(path == ''){
-            console.log('No default server path found, please set it or use the -p flag to work from a specific directory')
-            process.exit()
-        }
-        path = path[0] != '/' ? `${process.cwd()}/${path}` : path
+        path = pathParser.parse(program.path)
         var parameters = {
             version: program.artVersion,
             path: path,
@@ -26,12 +22,12 @@ program
 
         const versionChecker = require('../lib/versionCheck')
         if (!program.version) {
-            console.log('No version was specified. This is not docker and there is no default latest tag')
+            ls.error('No version was specified. This is not docker and there is no default latest tag')
             return
         } else if (!versionChecker.checkVersion(manager.getInstanceMetadata(parameters.path).version, parameters.version, 'upgrade')) {
-            console.log('Cannot upgrade to an earlier or similar version')
+            ls.error('Cannot upgrade to an earlier or similar version')
         } else {
-            console.log('Version is valid, upgrading...')
+            ls.success('Version is valid, upgrading...')
             storageManager.getVersion(parameters)
         }
     })

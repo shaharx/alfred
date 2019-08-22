@@ -1,4 +1,4 @@
-FROM node:12.6.0
+FROM node:10.16.3
 
 RUN apt update
 RUN apt install -y openjdk-8-jdk
