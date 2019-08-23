@@ -11,8 +11,9 @@ program
     .command('start', 'start Artifactory')
     .command('stop', 'stop Artifactory')
     .command('case', 'case management module - Not funtional yet')
-    .command('set', 'change Artifactory configurations')
-    .command('logback', 'change Artifactory configurations')
+    .command('db', 'change Artifactory configurations')
+    .command('logback', 'change Artifactory logback configurations')
+    .command('bs', 'change Artifactory configurations')
     .parse(process.argv)
 
 if (!process.argv.slice(2).length) {

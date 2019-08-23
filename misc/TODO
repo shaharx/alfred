@@ -1,8 +1,8 @@
 Fix the prompt start issue - needs further testing
 Make the path to server an argument without flag
-promisify exec commands
+shelljs exec commands
+Make one script that run shell commands
 Add switch name from the default artifactory-pro-version to a custom one by manipulating the entry name from the zip
-Chalk it
 Fix the upgrade change the server.xml back to default
 make sure to not print passwords as in the database creation
 install licenses automatically
@@ -17,3 +17,8 @@ create alfred logback show to show the loggers and appenders in the logback.xml 
 Make the ability to change the logger level
 Make alfred info
 Make one url to alfred tools repository
+Use the find-process module to determine whether the port you want to start artifactory on is available or not
+Use shelljs to find if the artifactory process that runs belongs to the same directory
+add description to commands
+change set db to db set
+add support for db queries
