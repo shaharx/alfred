@@ -8,16 +8,14 @@ program
     .description('Adds or modifies a parameter in a specific provider')
     .option('-p, --path [path]', 'the path to Artifactory\'s binarystore.xml file')
     .option('-n, --providerName <provider>', 'the name/id of the provider')
-    .option('-k, --parameterKey <key>', 'The parameter to add')
+    .option('-k, --parameters <parameters>', 'The parameter to add')
     .action(() => {
         var options = {
             path: pathParser.parse(program.path),
-            provider: program.providerName
+            provider: program.providerName,
+            parameters: program.parameters
         }
-        // bsmanager.modifyProviderParameter(options)
-        console.log(program.parameterKey)
-        // alfred bs mod -n s3 -k "identity=1234 credential=password" - 
-        // turn this into a an array of key value and replace the variable string after stringifying the obejct
+        bsmanager.modifyProviderParameters(options)
     })
 
 if (!process.argv.slice(2).length) {
