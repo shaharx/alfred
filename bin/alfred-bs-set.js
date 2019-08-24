@@ -14,7 +14,7 @@ program
     .option('-f, --force', 'Saftey check to make sure you understand the this command overwrites the current binarystore.xml')
     .action(() => {
         if (!program.force) {
-            ls.warn('This command will over write the current binarystore.xml file. Please rerun this command with the -f --force flag')
+            ls.warn('This command will overwrite the current binarystore.xml file. Please rerun this command with the -f --force flag')
             process.exit()
         }
         var options = {

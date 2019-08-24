@@ -8,7 +8,7 @@ program
     .description('Adds or modifies a parameter in a specific provider')
     .option('-p, --path [path]', 'the path to Artifactory\'s binarystore.xml file')
     .option('-n, --providerName <provider>', 'the name/id of the provider')
-    .option('-k, --parameters <parameters>', 'The parameter to add')
+    .option('-o, --parameters <parameters>', 'The parameter to add. -p was taken to -o is for options')
     .action(() => {
         var options = {
             path: pathParser.parse(program.path),

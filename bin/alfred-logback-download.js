@@ -4,13 +4,13 @@ const manager = require('../lib/manager')
 const dl = require('../lib/downloader')
 const ls = require('../lib/log-system')
 
-const defaulUrl = "https://shaharl.jfrog.io/shaharl/alfred-tools/logback-lib.zip"
+const defaultUrl = "https://shaharl.jfrog.io/shaharl/alfred-tools/logback-lib.zip"
 
 program
     .version(pkg.version)
-    .option('-u, --url [url]', 'The url to download from', defaulUrl)
-    .option('-n, --username [username]', 'The username and password of the repository.')
-    .option('-p, --password [password]', 'The url to download from')
+    .option('-u, --url [url]', 'The url to download from', defaultUrl)
+    .option('-n, --username [username]', 'username')
+    .option('-p, --password [password]', 'password')
     .action(() => {
         if (!program.username || ! program.password){
             ls.error('Not all credentials were passed on')

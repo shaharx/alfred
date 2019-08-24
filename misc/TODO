@@ -22,3 +22,4 @@ Use shelljs to find if the artifactory process that runs belongs to the same dir
 add description to commands
 change set db to db set
 add support for db queries
+Alfred bs remove -- provider
