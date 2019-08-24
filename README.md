@@ -27,7 +27,7 @@ npm link
 ```
 To see a list of available commands, use the --help under any top or subcommand to view its available options and descriptions
 
-### Deploying Artifactory
+## Deploying Artifactory
 To deploy Artifactory, run the deploy command along with the mandatory -v (--artVersion) flag.
 If the -p (--path) flag is not specified, artifactory will be deployed to the current working directory.
 When deploying Artifactory, alfred checks in his cache (~/.alfred) if the version exsits. If not, the version archive will first be downloaded to the cache and next time download will not be necessary. This applies to other tools like the jdbc loggers, logback library plugins etc...
@@ -37,10 +37,13 @@ alfred deploy -v <x.x.x>
 alfred deploy -v <x.x.x> -p 
 ```
 
-After the deployment, there will be a prompt whether to set the deployed server as the default server or not.
+After the deployment, the deployed server can be set as the default server using 
+```
+alfred set -d <path_toartifactory_home>
+```
 This means that for the following commands, if the -p (--path) flag will not be specified, the command will be executed on the default server as can be seen in the next section
 
-### Basic Usage Example
+## Basic Usage Example
 
 To start and stop artifactory, use the following commands
 
@@ -84,24 +87,60 @@ You can specify a connector version to download using the -c flag or use default
 Using the logback command, the logback.xml file can be modified with loggers of choice.
 If the logger has an apprender-ref key configured, alfred will add the corresponding appender aswell.
 Alfred checks 
+In order to add loggers, the logback library first needs to be downloaded using
+
+```
+alfred logback download -n <username> -p <password>
+```
+Then, in order to add loggers, the logger name needs to be specified the -n <logger_name> flag
 ```
 alfred logback add -n org.apache.http
 alfred logback add -n org.jfrog.storage.JdbcHelper -p artifactory-pro-6.11.6/
 ```
+For your convenience, you can run the 'alfred logback list' to view all the available logger in the logback library snippet
 When setting a logger, alfred will look for it in ${alfredHome}/tools/logback-snippets under the loggers directory or under the appenders directory if one is needed.
 Until the loggers bundle will be available, the loggers need to be added to those directories manually under a file for each logger/appender snippet in the corresponding folder with a .xml extension
 
 ## Setting up a binary store
 
 Setting up a binary store process takes 2 basic steps
-
-
-## Setting custom ports
-
-Custom ports can be set using the port command as follows:
+First, the config version needs to be set along with the chain template version as follows:
 
 ```
-alfred set port -i 3
+alfred bs set -v <config_version> -t <chain_template>
 ```
-The above command will increment all the port values under in the server.xml file by 3 meaning that if the default port is 8081, it will change to 8084, 8040 to 8043 etc. 
-Currently, the server.xml file is overwritten in upgrade so remember to back it up.
+
+Sample output to the binarystore.xml:
+```
+<config version="v1">
+  <chain template="full-db"/>
+</config>
+```
+Next, some binary stores require parameters to be provided to the provider in the chain template as for s3 that requires credentials in order to connect. A provider can be added to the binarystore.xml file using the mod command to modify a provider.
+In order to add a provider, the mod command needs to be run as follows:
+
+alfred bs mod -n <provider_name/id> -o <paramteres/options>
+
+```
+alfred bs set -v 2 -t s3 -- Setting a new chain template for s3
+alfred bs mod -n s3 -o "endpoint=http://s3.amazonaws.com identity=XFJDHTU credential=GIOW/83gYYI path=some-path bucketName=shaharl-test"
+```
+Example output:
+```
+<config version="2">
+  <chain template="s3"/>
+  <provider id="s3" type="s3">
+    <endpoint>http://s3.amazonaws.com</endpoint>
+    <identity>XFJDHTU</identity>
+    <credential>GIOW/83gYYI</credential>
+    <path>some-path</path>
+    <bucketName>shaharl-test</bucketName>
+  </provider>
+</config>
+```
+
+The mod command will search for the provider name/id using the -n flag and will add the parameters under the -o flag. The parameters needs to be passed using the following template:
+"key=value key=value key=value"
+The whole argument needs to be enclosed with double quotes, each key value pair needs to be seperated by a space " " and each key needs to be seperated from its value using the "=" character
+If the provider already contains the corresponding key, the value of that key will be modified.
+If the provider does not exist under the chain template, it will be created automatically.

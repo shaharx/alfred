@@ -6,6 +6,7 @@ const pkg = require('../package.json');
 program
     .version(pkg.version)
     .description('This is fantastic, you don\'t get it.')
+    .command('set', 'configure basic configuration')
     .command('deploy', 'deploy Artifactory')
     .command('upgrade', 'upgrade Artifactory')
     .command('start', 'start Artifactory')
