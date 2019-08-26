@@ -1,9 +1,9 @@
 # Alfred
 > Artifactory for every pocket
 
-Alfred is a CLI app that controls standalone Artifactory server via the ARTIFACTORY_HOME directory.
-Using alfred you can deploy, upgrade and change configurations in Artifactory without the need to edit, copy, or download any configuration file. All is done using the alfred command.
-Using alfred makes it easier to deploy and maintain multiple artifactory servers for different uses, it takes less space than other install types and any server that was deployed by alfred does not depend on it in order to work as with docker.
+Alfred is a CLI application that controls standalone Artifactory servers via the ARTIFACTORY_HOME directory.
+Using alfred you can deploy, upgrade and change configurations in Artifactory without the need to edit, copy, or download any configuration file.
+Using alfred makes it easier to deploy and maintain multiple artifactory servers for different uses, it takes less space than other install types and any server that was deployed by alfred does not depend on it in order to work.
 
 # Requirements
 
@@ -30,16 +30,16 @@ To see a list of available commands, use the --help under any top or subcommand 
 ## Deploying Artifactory
 To deploy Artifactory, run the deploy command along with the mandatory -v (--artVersion) flag.
 If the -p (--path) flag is not specified, artifactory will be deployed to the current working directory.
-When deploying Artifactory, alfred checks in his cache (~/.alfred) if the version exsits. If not, the version archive will first be downloaded to the cache and next time download will not be necessary. This applies to other tools like the jdbc loggers, logback library plugins etc...
+When deploying Artifactory, alfred checks in his cache (~/.alfred) if the version exsits. If not, the version archive will first be downloaded to the cache so next time download will not be necessary. This applies to other tools like the jdbc loggers, logback library plugins etc...
 
 ```sh
 alfred deploy -v <x.x.x>
 alfred deploy -v <x.x.x> -p 
 ```
-
-After the deployment, the deployed server can be set as the default server using 
+Optionally, the -d --default flag can be passed to the deploy command to make the deployed server as default.
+After the deployment, the deployed server can also be set as the default server using 
 ```
-alfred set -d <path_toartifactory_home>
+alfred set -d <path_to_artifactory_home>
 ```
 This means that for the following commands, if the -p (--path) flag will not be specified, the command will be executed on the default server as can be seen in the next section
 
@@ -58,8 +58,8 @@ alfred stop -p relative/or/absolute/path/to/ARTIFACTORY_HOME
 ```
 This applies to every command that is run on an artifactory server (home).
 Using the -p flag, you can control any artifactory standalone home directory without any pre configurations.
-All commands are run against the artifactory home directory. No need to specify any subdirectories, alfred will handle it
- * Note: for now, if the path is a server that was not deployed by artifactory, alfred will not be able to upgrade it due to the absence of the inatance_metadata file that is written to the artifactory home on deployment 
+All commands are run against the artifactory home directory and no need to specify subdirectories.
+ * Note: for now, if the path is a server that was not deployed by artifactory, alfred will not be able to upgrade it due to the absence of the inatance_metadata file that is written to the artifactory home on deployment. Hack: put the following json as the instance_metadata >> {"version":"current_version"}
 
 ## Upgrading Artifactory
 
@@ -107,7 +107,7 @@ Setting up a binary store process takes 2 basic steps
 First, the config version needs to be set along with the chain template version as follows:
 
 ```
-alfred bs set -v <config_version> -t <chain_template>
+alfred bs set -v v1 -t full-db
 ```
 
 Sample output to the binarystore.xml:

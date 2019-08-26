@@ -1,15 +1,20 @@
-Fix the prompt start issue - needs further testing
+NEXT:
+server.xml
+artifactory.system.properties
+finish the loggers (change log level)
+binary store remove providers and properties
+add command templates for the bs mod module
+
+See to the standalone xml parameter
+Build loggers from scratch
 Make the path to server an argument without flag
 shelljs exec commands
 Make one script that run shell commands
 Add switch name from the default artifactory-pro-version to a custom one by manipulating the entry name from the zip
 Fix the upgrade change the server.xml back to default
-make sure to not print passwords as in the database creation
 install licenses automatically
 Make the various inquirer modules have the option to skip console prompts and use defaults (predefined defaults object)
 modify the set port command to use xml2js
-make alfred set default server
-make all sub commands use the pathParser
 Make the upgrade save the server.xml file
 Make init command to create alfred home directories
 Check if the appenders can stay without the loggers or remove them
@@ -20,6 +25,7 @@ Make one url to alfred tools repository
 Use the find-process module to determine whether the port you want to start artifactory on is available or not
 Use shelljs to find if the artifactory process that runs belongs to the same directory
 add description to commands
-change set db to db set
 add support for db queries
 Alfred bs remove -- provider
+Make the ip for the database spaces safe
+Give the binary store its added value by pre defining command templates for fast provider setting

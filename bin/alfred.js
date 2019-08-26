@@ -12,9 +12,10 @@ program
     .command('start', 'start Artifactory')
     .command('stop', 'stop Artifactory')
     .command('case', 'case management module - Not funtional yet')
-    .command('db', 'change Artifactory configurations')
-    .command('logback', 'change Artifactory logback configurations')
-    .command('bs', 'change Artifactory configurations')
+    .command('db', 'configure Artifactory database configurations')
+    .command('logback', 'configure Artifactory logback configurations')
+    .command('bs', 'configure Artifactory binary store configurations')
+    .command('props', 'configure artifactory system properties configurations')
     .parse(process.argv)
 
 if (!process.argv.slice(2).length) {

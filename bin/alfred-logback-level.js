@@ -5,13 +5,19 @@ const lbmanager = require('../lib/logback-manager')
 
 program
     .version(pkg.version)
-    .description('Remove a logger from the logaback.xml file')
-    .option('-n, --name <logger_name>', 'the Artifactory version to deploy')
+    .description('Change a log level of a specific logger')
     .option('-p, --path [path]', 'the path to deploy Artifactory to. current working directory by default')
-    .option('-i, --index <index>', 'the logger index that will be prompted in case of logger duplicates')
+    .option('-n, --name <logger_name>', 'The logger to change level')
+    .option('-l, --level <level>', 'The logger to change level')
     .action(() => {
+        path = pathParser.parse(program.path)
+        var options = {
+            path: path,
+            loggerName: program.name,
+            level: program.level
+        }
         newPath = pathParser.parse(program.path)
-        lbmanager.removeLogger(newPath, program.name, program.index)
+        lbmanager.changeLogLevel(options)
     })
 
 if (!process.argv.slice(2).length) {
