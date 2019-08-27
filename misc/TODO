@@ -1,7 +1,6 @@
 NEXT:
 server.xml
 artifactory.system.properties
-finish the loggers (change log level)
 binary store remove providers and properties
 add command templates for the bs mod module
 
@@ -19,7 +18,6 @@ Make the upgrade save the server.xml file
 Make init command to create alfred home directories
 Check if the appenders can stay without the loggers or remove them
 create alfred logback show to show the loggers and appenders in the logback.xml file
-Make the ability to change the logger level
 Make alfred info
 Make one url to alfred tools repository
 Use the find-process module to determine whether the port you want to start artifactory on is available or not

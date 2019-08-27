@@ -25,7 +25,7 @@ git clone https://github.com/shaharx/alfred.git
 cd alfred
 npm link
 ```
-To see a list of available commands, use the --help under any top or subcommand to view its available options and descriptions
+To see a list of available commands, use the --help under any top or sub command to view its available options and descriptions
 
 ## Deploying Artifactory
 To deploy Artifactory, run the deploy command along with the mandatory -v (--artVersion) flag.

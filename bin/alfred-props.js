@@ -15,14 +15,14 @@ program
                 path: newPath,
                 parameter: program.add
             }
-            propsManager.add(options)
+            // propsManager.add(options)
         }
         if(program.remove){
             const options = {
                 path: newPath,
                 parameter: program.remove
             }
-            propsManager.remove(options)
+            // propsManager.remove(options)
         }
     })
 
