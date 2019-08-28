@@ -59,46 +59,4 @@ function runQueries(dboptions, queries) {
     })
 }
 
-var requirements = [{
-    type: 'input',
-    name: 'ip',
-    message: `database ip:`,
-    default: 'localhost'
-}, {
-    type: 'input',
-    name: 'port',
-    message: 'database port:',
-    default: '5432'
-}, {
-    type: 'input',
-    name: 'dbusername',
-    message: 'database username:',
-    default: 'postgres'
-}, {
-    type: 'input',
-    name: 'databasename',
-    message: 'default database name:',
-    default: 'postgres'
-}, {
-    type: 'password',
-    name: 'dbpassword',
-    message: 'database password:',
-    default: 'pass'
-}, {
-    type: 'input',
-    name: 'database',
-    message: 'database name:',
-    default: 'artifactory'
-}, {
-    type: 'input',
-    name: 'username',
-    message: 'username:',
-    default: 'artifactory'
-}, {
-    type: 'password',
-    name: 'password',
-    message: 'password:',
-    default: 'password'
-}]
-
 module.exports = { setDB }
