@@ -4,29 +4,42 @@ const dbSetup = require('./../../lib/dbSetup')
 const ls = require('../../lib/log-system')
 
 function setDB(options) {
-    inquirer.prompt(requirements).then(answers => {
-        var dbFile =
-            `type=postgresql\n` +
-            `driver=org.postgresql.Driver\n` +
-            `url=jdbc:postgresql://${answers.ip}:${answers.port}/${answers.database}\n` +
-            `username=${answers.username}\n` +
-            `password=${answers.password}\n`
+    var parameters = {
+        host: 'localhost',
+        port: '5432',
+        psql_username: 'postgres',
+        psql_database: 'postgres',
+        psql_password: 'pass',
+        art_dbname: 'artifactory',
+        art_username: 'artifactory',
+        art_password: 'password'
+    }
 
-        var dboptions = {
-            user: answers.dbusername,
-            host: answers.ip,
-            port: answers.port,
-            database: answers.databasename,
-            password: answers.dbpassword
-        }
-        options.connector = `postgresql-${options.connVer}.jre6.jar`
-        options.dbFile = dbFile
-        options.connectorUrl = `https://jdbc.postgresql.org/download/postgresql-${options.connVer}.jre6.jar`
-        options.downloadFile = `postgresql-${options.connVer}.jre6.jar`
-        options.queries = [`CREATE USER ${answers.username} WITH PASSWORD '${answers.password}';`, `CREATE DATABASE ${answers.database} WITH OWNER=${answers.username} ENCODING='UTF8';`, `GRANT ALL PRIVILEGES ON DATABASE ${answers.database} TO ${answers.username};`]
-        runQueries(dboptions, options.queries)
-        dbSetup.setDB(options)
-    })
+    var dbFile =
+        `type=postgresql\n` +
+        `driver=org.postgresql.Driver\n` +
+        `url=jdbc:postgresql://${parameters.host}:${parameters.port}/${parameters.art_dbname}\n` +
+        `username=${parameters.art_username}\n` +
+        `password=${parameters.art_password}\n`
+
+    var dboptions = {
+        host: parameters.host,
+        port: parameters.port,
+        user: parameters.psql_username,
+        database: parameters.psql_database,
+        password: parameters.psql_password
+    }
+    options.connector = `postgresql-${options.connVer}.jre6.jar`
+    options.dbFile = dbFile
+    options.connectorUrl = `https://jdbc.postgresql.org/download/postgresql-${options.connVer}.jre6.jar`
+    options.downloadFile = `postgresql-${options.connVer}.jre6.jar`
+    options.queries = [`CREATE USER ${parameters.art_username} WITH PASSWORD '${parameters.art_password}';`, `CREATE DATABASE ${parameters.art_dbname} WITH OWNER=${parameters.art_username} ENCODING='UTF8';`, `GRANT ALL PRIVILEGES ON DATABASE ${parameters.art_dbname} TO ${parameters.art_username};`]
+    
+    if (options.skipQuery) { ls.warn('Skipped running queries in the database') }
+    else { runQueries(dboptions, options.queries) }
+
+    if (options.skipSettings) { ls.warn('Skipped the database in Artifactory') }
+    else { dbSetup.setDB(options) }
 }
 
 function runQueries(dboptions, queries) {
