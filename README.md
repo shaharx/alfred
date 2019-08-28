@@ -70,17 +70,24 @@ alfred upgrade -v <x.x.x>
 alfred upgrade -v <x.x.x> -p path/to/artifactory/home
 ```
 
-## Connect to an external database
+## Connect to external database
 
 To set up an external database, the following command needs to be run:
 ```
 alfred set db -t mysql
 alfred set db -t mysql -p path/to/artifactory/home
 ```
-Alfred currently supports only mysql and posqtgres
-This will prompt you for the database settings such as host, port etc.
-Setting the database will also downaload (if not cached) and deploy the jdbc logger, and will run the required inital queries on the database itself.
+Alfred currently supports only mysql and postgresql
+
+In order to set a database, a json object must be passed including all the necessary parameters
+```
+alfred db set -t postgresql -o 'JSON_OBJECT' 
+```
+Run the command 'alfred db set --templates' to get templates for the db set commands for the supported databases
+
+Setting the database will also download (if not cached) and deploy the jdbc logger, and will run the required inital queries on the database itself.
 You can specify a connector version to download using the -c flag or use default versions by not specifying anything.
+The --skipQuery flag can be passed to skip running the queries in the database and the database username and password will not be necessary and the --skipSettings flag can be passed to skip setting the database in Artifactory
 
 ## Adding loggers to the logback.xml file
 
