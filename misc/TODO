@@ -1,4 +1,5 @@
 NEXT:
+add docker and query the database support
 server.xml
 artifactory.system.properties
 binary store remove providers and properties
