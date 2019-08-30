@@ -81,32 +81,17 @@ Alfred currently supports only mysql and postgresql
 
 In order to set a database, a json object must be passed including all the necessary parameters
 ```
-alfred db set -t postgresql -o 'JSON_OBJECT' 
+alfred db set -t postgresql -o 'JSON_OBJECT'
 ```
+Alternatively, if you don't pass the -o flag, default options will be used.
+
+If docker is installed, the -n --new flag will set up a new docker container with a default image or the image the will be specified with the -i --image flag.
+
 Run the command 'alfred db set --templates' to get templates for the db set commands for the supported databases
 
 Setting the database will also download (if not cached) and deploy the jdbc logger, and will run the required inital queries on the database itself.
 You can specify a connector version to download using the -c flag or use default versions by not specifying anything.
 The --skipQuery flag can be passed to skip running the queries in the database and the database username and password will not be necessary and the --skipSettings flag can be passed to skip setting the database in Artifactory
-
-## Adding loggers to the logback.xml file
-
-Using the logback command, the logback.xml file can be modified with loggers of choice.
-If the logger has an apprender-ref key configured, alfred will add the corresponding appender aswell.
-Alfred checks 
-In order to add loggers, the logback library first needs to be downloaded using
-
-```
-alfred logback download -n <username> -p <password>
-```
-Then, in order to add loggers, the logger name needs to be specified the -n <logger_name> flag
-```
-alfred logback add -n org.apache.http
-alfred logback add -n org.jfrog.storage.JdbcHelper -p artifactory-pro-6.11.6/
-```
-For your convenience, you can run the 'alfred logback list' to view all the available logger in the logback library snippet
-When setting a logger, alfred will look for it in ${alfredHome}/tools/logback-snippets under the loggers directory or under the appenders directory if one is needed.
-Until the loggers bundle will be available, the loggers need to be added to those directories manually under a file for each logger/appender snippet in the corresponding folder with a .xml extension
 
 ## Setting up a binary store
 
@@ -151,3 +136,22 @@ The mod command will search for the provider name/id using the -n flag and will 
 The whole argument needs to be enclosed with double quotes, each key value pair needs to be seperated by a space " " and each key needs to be seperated from its value using the "=" character
 If the provider already contains the corresponding key, the value of that key will be modified.
 If the provider does not exist under the chain template, it will be created automatically.
+
+## Adding loggers to the logback.xml file
+
+Using the logback command, the logback.xml file can be modified with loggers of choice.
+If the logger has an apprender-ref key configured, alfred will add the corresponding appender aswell.
+Alfred checks 
+In order to add loggers, the logback library first needs to be downloaded using
+
+```
+alfred logback download -n <username> -p <password>
+```
+Then, in order to add loggers, the logger name needs to be specified the -n <logger_name> flag
+```
+alfred logback add -n org.apache.http
+alfred logback add -n org.jfrog.storage.JdbcHelper -p artifactory-pro-6.11.6/
+```
+For your convenience, you can run the 'alfred logback list' to view all the available logger in the logback library snippet
+When setting a logger, alfred will look for it in ${alfredHome}/tools/logback-snippets under the loggers directory or under the appenders directory if one is needed.
+Until the loggers bundle will be available, the loggers need to be added to those directories manually under a file for each logger/appender snippet in the corresponding folder with a .xml extension

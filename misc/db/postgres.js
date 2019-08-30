@@ -1,17 +1,11 @@
-const manager = require('../../lib/manager')
-const inquirer = require('inquirer')
 const dbSetup = require('../../lib/database-manager')
 const ls = require('../../lib/log-system')
+var dockerCLI = require('docker-cli-js')
+var Docker = dockerCLI.Docker
 
 function setDB(options) {
-    var parameters = {}
-    if (options.useDefaults) {
-        parameters = defaultParameters
-    } else if (options.parameters) {
-        parameters = options.parameters
-    } else {
-        ls.error(`No options were specified. use the --useDefaults flag to use the following default values: ${defaultParameters}`)
-    }
+    var parameters = options.parameters ? options.parameters : defaultParameters
+
     var dbFile =
         `type=postgresql\n` +
         `driver=org.postgresql.Driver\n` +
@@ -26,20 +20,33 @@ function setDB(options) {
         database: parameters.psql_database,
         password: parameters.psql_password
     }
+
     options.connector = `postgresql-${options.connVer}.jre6.jar`
     options.dbFile = dbFile
     options.connectorUrl = `https://jdbc.postgresql.org/download/postgresql-${options.connVer}.jre6.jar`
     options.downloadFile = `postgresql-${options.connVer}.jre6.jar`
     options.queries = [`CREATE USER ${parameters.artifactory_db_username} WITH PASSWORD '${parameters.artifactory_db_password}';`, `CREATE DATABASE ${parameters.art_dbname} WITH OWNER=${parameters.artifactory_db_username} ENCODING='UTF8';`, `GRANT ALL PRIVILEGES ON DATABASE ${parameters.art_dbname} TO ${parameters.artifactory_db_username};`]
 
-    if (options.skipQuery) { ls.warn('Skipped running queries in the database') }
-    else { runQueries(dboptions, options.queries) }
+    if (options.new) {
+        var docker = new Docker();
+        var image = options.image ? options.image : 'postgres'
+
+        var dockerCommand = `run --name alfred_psql -p ${dboptions.port}:${dboptions.port} -e POSTGRES_PASSWORD=${dboptions.password} -d ${image}`
+        docker.command(dockerCommand)
+            .then(function (data) {
+                var interval = setInterval(() => {
+                    runQueries(dboptions, options.queries, interval)
+                }, 2000)
+            })
+    }
+    else if (options.skipQuery) { ls.warn('Skipped running queries in the database') }
+    else { runQueries(dboptions, options.queries, false) }
 
     if (options.skipSettings) { ls.warn('Skipped the database in Artifactory') }
     else { dbSetup.setDB(options) }
 }
 
-function runQueries(dboptions, queries) {
+function runQueries(dboptions, queries, interval) {
     const { Client } = require('pg')
     const client = new Client(dboptions)
     client.connect()
@@ -52,7 +59,10 @@ function runQueries(dboptions, queries) {
             })
             err ? ls.error(err) : ls.success(`succesfully ran ${queries[1]}`)
         })
-        err ? ls.error(err) : ls.success(`succesfully ran ${queries[0]}`)
+        if (!err) {
+            if (interval) { clearInterval(interval) }
+            ls.success(`succesfully ran ${queries[0]}`)
+        } else { ls.error(err) }
     })
 }
 
@@ -68,3 +78,7 @@ var defaultParameters = {
 }
 
 module.exports = { setDB }
+
+
+// {"host":"localhost","port":"3306","user":"root","password":"password"}
+// {"host":"localhost","port":"3306","user":"root","password":"password"}

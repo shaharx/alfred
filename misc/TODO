@@ -4,15 +4,15 @@ server.xml
 artifactory.system.properties
 binary store remove providers and properties
 add command templates for the bs mod module
+add environment variables as a flag to docker
+start and stop the db image if was set up by alfred
 
 See to the standalone xml parameter
-Build loggers from scratch
 Make the path to server an argument without flag
 shelljs exec commands
 Make one script that run shell commands
 Add switch name from the default artifactory-pro-version to a custom one by manipulating the entry name from the zip
 Fix the upgrade change the server.xml back to default
-install licenses automatically
 Make the various inquirer modules have the option to skip console prompts and use defaults (predefined defaults object)
 modify the set port command to use xml2js
 Make the upgrade save the server.xml file
@@ -24,7 +24,6 @@ Make one url to alfred tools repository
 Use the find-process module to determine whether the port you want to start artifactory on is available or not
 Use shelljs to find if the artifactory process that runs belongs to the same directory
 add description to commands
-add support for db queries
 Alfred bs remove -- provider
 Make the ip for the database spaces safe
-Give the binary store its added value by pre defining command templates for fast provider setting
+Give the binary store its added value by pre defining command templates for fast provider settings
