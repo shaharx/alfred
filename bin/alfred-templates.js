@@ -38,9 +38,9 @@ function bsTemplates() {
     ]
     
     var providers = [
-        `# s3/cluster-s3: alfred bs mod -n google-storage -o "endpoint= identity= credential= bucketName= path="\n`,
+        `# s3/cluster-s3: alfred bs mod -n s3 -o "endpoint= identity= credential= bucketName= path="\n`,
         `# cluster-/-google-storage: alfred bs mod -n google-storage -o "endpoint= identity= credential= bucketName="\n`,
-        `# azure/cluster-azure: alfred bs mod -n google-storage -o "accountName= accountKey= endpoint= containerName="\n`
+        `# azure/cluster-azure: alfred bs mod -n azure-blob-storage -o "accountName= accountKey= endpoint= containerName="\n`
     ]
     ls.warn('Binary store chain templates:\n')
     chain_templates.forEach(command => {
