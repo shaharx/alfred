@@ -1,14 +1,13 @@
 NEXT:
 query the database support
 server.xml
+copy the master.key
 artifactory.system.properties
 binary store remove providers and properties
-add command templates for the bs mod module
 add environment variables as a flag to docker
 start and stop the db image if was set up by alfred
 limit the connections retry to the databases
 support for server names
-make template manager
 make the binary store encrypted passwords don't cause issue when splitting the '=' character they might contain - find a way to split only by the first '=' char
 See to the standalone xml parameter
 Make the path to server an argument without flag
@@ -29,4 +28,3 @@ Use shelljs to find if the artifactory process that runs belongs to the same dir
 add description to commands
 Alfred bs remove -- provider
 Make the ip for the database spaces safe
-Give the binary store its added value by pre defining command templates for fast provider settings

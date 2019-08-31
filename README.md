@@ -96,8 +96,6 @@ Alternatively, if you don't pass the -o flag, default options will be used.
 
 If docker is installed, the -n --new flag will set up a new docker container with a default image or the image the will be specified with the -i --image flag.
 
-Run the command 'alfred db set --templates' to get templates for the db set commands for the supported databases
-
 Setting the database will also download (if not cached) and deploy the jdbc logger, and will run the required inital queries on the database itself.
 You can specify a connector version to download using the -c flag or use default versions by not specifying anything.
 The --skipQuery flag can be passed to skip running the queries in the database and the database username and password will not be necessary and the --skipSettings flag can be passed to skip setting the database in Artifactory
