@@ -70,6 +70,15 @@ alfred upgrade -v <x.x.x>
 alfred upgrade -v <x.x.x> -p path/to/artifactory/home
 ```
 
+## Common templates
+
+Since commands can be long, the tamplates module prints common pre generated commands that can be copied and changed accordingly.
+```
+alfred templates
+```
+The templates command will print the tmplates for all the different configurations module.
+The results can be filtered using the module name as a flag i.e. --bs --ha --db etc...
+
 ## Connect to external database
 
 To set up an external database, the following command needs to be run:
@@ -126,7 +135,7 @@ Example output:
     <identity>XFJDHTU</identity>
     <credential>GIOW/83gYYI</credential>
     <path>some-path</path>
-    <bucketName>shaharl-test</bucketName>
+    <bucketName>the-bucket</bucketName>
   </provider>
 </config>
 ```
@@ -136,6 +145,16 @@ The mod command will search for the provider name/id using the -n flag and will 
 The whole argument needs to be enclosed with double quotes, each key value pair needs to be seperated by a space " " and each key needs to be seperated from its value using the "=" character
 If the provider already contains the corresponding key, the value of that key will be modified.
 If the provider does not exist under the chain template, it will be created automatically.
+
+## Setting up artifactory as HA node
+
+In order to set up Artifactory as HA node, the following command needs to be run:
+
+```
+alfred ha set -o "node.id=art1 context.url=http://localhost:8081/artifactory/ membership.port=0 primary=true"
+```
+This will set up the ha-node.properties file in the etc directory. Values can be changed accordignly.
+Support for 
 
 ## Adding loggers to the logback.xml file
 
