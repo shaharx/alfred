@@ -1,6 +1,5 @@
 NEXT:
-query the database support
-server.xml
+query the database
 copy the master.key
 artifactory.system.properties
 binary store remove providers and properties
@@ -27,4 +26,3 @@ Use the find-process module to determine whether the port you want to start arti
 Use shelljs to find if the artifactory process that runs belongs to the same directory
 add description to commands
 Alfred bs remove -- provider
-Make the ip for the database spaces safe

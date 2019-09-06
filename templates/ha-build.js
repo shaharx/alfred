@@ -18,8 +18,8 @@ const template = [
     `alfred db set -t postgresql -n -o $DB_PROPERTIES`,
     `# alfred bs set -v 2 -t $BS_TEMPLATE -f`,
     `# alfred bs mod -n s3 -o "$PROVIDER_PROPS"`,
-    `alfred ha set -o "node.id=art1 context.url=http://localhost:8088/artifactory/ membership.port=0 primary=true"`,
-    `alfred port -o "8081:8088 8015:8018 8040:8048"`,
+    `alfred ha set -o "node.id=art1 context.url=http://localhost:8091/artifactory/ membership.port=0 primary=true"`,
+    `alfred port -o "8081:8091 8015:8025 8040:8050 8019:8029"`,
     `alfred start\n`,
 
     `# secondary node`,
@@ -29,8 +29,8 @@ const template = [
     `alfred db set -t postgresql -o $DB_PROPERTIES --skipQuery`,
     `# alfred bs set -v 2 -t $BS_TEMPLATE -f`,
     `# alfred bs mod -n s3 -o "$PROVIDER_PROPS"`,
-    `alfred ha set -o "node.id=art2 context.url=http://localhost:8089/artifactory/ membership.port=0 primary=false"`,
-    `alfred port -o "8081:8089 8015:8019 8040:8049"`,
+    `alfred ha set -o "node.id=art2 context.url=http://localhost:8092/artifactory/ membership.port=0 primary=false"`,
+    `alfred port -o "8081:8092 8015:8026 8040:8051 8019:8030"`,
     `# alfred start`
 ]
 
