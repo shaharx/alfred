@@ -31,7 +31,7 @@ function setDB(options) {
         var docker = new Docker();
         var image = options.image ? options.image : 'postgres'
 
-        var dockerCommand = `run --name alfred_psql -p ${dboptions.port}:${dboptions.port} -e POSTGRES_PASSWORD=${dboptions.password} -d ${image}`
+        var dockerCommand = `run --name alfred_psql -p ${dboptions.port}:5432 -e POSTGRES_PASSWORD=${dboptions.password} -d ${image}`
         docker.command(dockerCommand)
             .then(function (data) {
                 var interval = setInterval(() => {

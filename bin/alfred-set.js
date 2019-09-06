@@ -8,7 +8,7 @@ const pathParser = require('../lib/pathParser')
 
 program
     .version(pkg.version)
-    .description('Start Artifactory')
+    .description('Set basic configurations')
     .option('-d, --default <path>', 'set default server')
     .action(() => {
         defaultPath = pathParser.parse(program.default)

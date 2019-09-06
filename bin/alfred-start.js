@@ -20,7 +20,7 @@ program
             exec(`${path}/bin/artifactory.sh start`, execCallback)
             ls.log('Starting Artifactory')
         } else {
-            ls.log(`Artifactory is already running. Consider stopping it first and then try again\nIf you know it is not running, remove ${path}run/artifactory.pid and try again`)
+            ls.log(`Artifactory is already running. Consider stopping it first and then try again\nIf you know it is not running, remove ${path}/run/artifactory.pid and try again`)
         }
     })
 

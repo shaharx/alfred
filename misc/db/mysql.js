@@ -29,7 +29,7 @@ function setDB(options) {
     if (options.new) {
         var docker = new Docker();
         var image = options.image ? options.image : 'mysql:5.7'
-        var dockerCommand = `run --name alfred_mysql -p ${dboptions.port}:${dboptions.port} -e MYSQL_ROOT_PASSWORD=${dboptions.password} -d ${image}`
+        var dockerCommand = `run --name alfred_mysql -p ${dboptions.port}:3306 -e MYSQL_ROOT_PASSWORD=${dboptions.password} -d ${image}`
         docker.command(dockerCommand)
             .then(function (data) {
                 var interval = setInterval(() => {

@@ -3,20 +3,20 @@ const pkg = require('../package.json')
 const fs = require('fs')
 const ls = require('../lib/log-system')
 const pathParser = require('../lib/pathParser')
+const im = require('../lib/instanceManager')
+const pm = require('../lib/port-manager')
 
 program
     .version(pkg.version)
     .option('-p, --path [path]', 'Artifactory path to manipulate the server.xml on. default server by default')
-    .option('-i, --increment <number>', 'the value to increment the default port values with. 0 by default')
-    .option('-a --art <art>', 'change artifactory\'s port')
-    .option('-s --access <access>', 'change access\'s port')
-    .option('-c --catalina <cataline>', 'change catalina\'s port')
+    .option('-o, --options <parameters>', 'the port numbers to change in the following format "8081:8082 8040:8041"')
     .action(() => {
         path = pathParser.parse(program.path)
-        var xmlFile = require('../misc/server-xml').xmlFile(program.increment ? program.increment : 0)
-        fs.writeFileSync(`${path}/tomcat/conf/server.xml`, xmlFile)
-        ls.success('server.xml file was modified successfully')
-        
+        const options = {
+            path: path,
+            parameters: program.options
+        }
+        pm.setPort(options)
     })
 
 if (!process.argv.slice(2).length) {

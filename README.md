@@ -152,7 +152,13 @@ In order to set up Artifactory as HA node, the following command needs to be run
 alfred ha set -o "node.id=art1 context.url=http://localhost:8081/artifactory/ membership.port=0 primary=true"
 ```
 This will set up the ha-node.properties file in the etc directory. Values can be changed accordignly.
-Support for 
+
+Alfred also offers a built in template to build an HA cluster from scratch using the --haBuild flag under the templates command
+```
+alfred templates --haBuild > haBuild.sh
+```
+This will write the template to a shell script named haBuild.sh and if the docker engine is up and running, the script is ready to execute.
+The script also includes commented lines of pre made configurations for fast modification of the cluster and it can also be used to set up a single instance.
 
 ## Adding loggers to the logback.xml file
 
@@ -172,3 +178,10 @@ alfred logback add -n org.jfrog.storage.JdbcHelper -p artifactory-pro-6.11.6/
 For your convenience, you can run the 'alfred logback list' to view all the available logger in the logback library snippet
 When setting a logger, alfred will look for it in ${alfredHome}/tools/logback-snippets under the loggers directory or under the appenders directory if one is needed.
 Until the loggers bundle will be available, the loggers need to be added to those directories manually under a file for each logger/appender snippet in the corresponding folder with a .xml extension
+
+## Setting custom ports
+Using the port command, the current ports can be changed as follows:
+```
+alfred port -o "8081:8082 8015:8016 8040:8041"
+```
+Where the left value of each pair is the existing port and the right value is the target port regardless of the service names

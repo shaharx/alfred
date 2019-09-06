@@ -17,6 +17,7 @@ program
     .command('ha', 'HA configurations module')
     .command('logback', 'Logback configurations module')
     .command('props', 'System properties configurations module')
+    .command('port', 'Configure ports in the server.xml file')
     .command('templates', 'Print templates for common configurations')
     .parse(process.argv)
 

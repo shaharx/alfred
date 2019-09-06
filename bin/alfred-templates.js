@@ -8,10 +8,12 @@ program
     .option('--bs', 'Binary store templates')
     .option('--db', 'Database templates')
     .option('--ha', 'HA templates')
+    .option('--haBuild', 'HA build template')
     .action(() => {
         if (program.db) { dbTemplates() }
         if (program.bs) { bsTemplates() }
         if (program.ha) { haTemplates() }
+        if (program.haBuild) { haBuild() }
     })
 
 if (!process.argv.slice(2).length) {
@@ -23,7 +25,7 @@ if (!process.argv.slice(2).length) {
 program.parse(process.argv)
 
 function bsTemplates() {
-    
+
     var chain_templates = [
         `# file-system: alfred bs set -v v1 -t file-system -f\n`,
         `# cache-fs: alfred bs set -v v1 -t cache-fs -f\n`,
@@ -36,7 +38,7 @@ function bsTemplates() {
         `# azure-blob-storage: alfred bs set -v 1 -t azure-blob-storage -f\n`,
         `# cluster-azure-blob-storage: alfred bs set -v 2 -t cluster-azure-blob-storage -f\n`
     ]
-    
+
     var providers = [
         `# s3/cluster-s3: alfred bs mod -n s3 -o "endpoint= identity= credential= bucketName= path="\n`,
         `# cluster-/-google-storage: alfred bs mod -n google-storage -o "endpoint= identity= credential= bucketName="\n`,
@@ -71,4 +73,8 @@ function haTemplates() {
     templates.forEach(command => {
         ls.log(`${command}`)
     })
+}
+
+function haBuild() {
+    require('../templates/ha-build').getTemplate()
 }
