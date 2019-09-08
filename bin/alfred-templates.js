@@ -1,6 +1,7 @@
 const program = require('commander')
 const pkg = require('../package.json')
 const ls = require('../lib/log-system')
+const haManager = require('../lib/ha-manager')
 
 program
     .version(pkg.version)
@@ -76,5 +77,6 @@ function haTemplates() {
 }
 
 function haBuild() {
-    require('../templates/ha-build').getTemplate()
+    var lines = haManager.getTemplate()
+    lines.forEach(line => ls.log(line))
 }

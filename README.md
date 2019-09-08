@@ -153,12 +153,15 @@ alfred ha set -o "node.id=art1 context.url=http://localhost:8081/artifactory/ me
 ```
 This will set up the ha-node.properties file in the etc directory. Values can be changed accordignly.
 
-Alfred also offers a built in template to build an HA cluster from scratch using the --haBuild flag under the templates command
+## Setting up 2 Nodes HA setup
+
+In order to fast setup a 2 nodes HA cluster run
 ```
-alfred templates --haBuild > haBuild.sh
+alfred ha build -v x.x.x
 ```
-This will write the template to a shell script named haBuild.sh and if the docker engine is up and running, the script is ready to execute.
-The script also includes commented lines of pre made configurations for fast modification of the cluster and it can also be used to set up a single instance.
+Where x.x.x is the desired Artifactory version.
+This will setup the cluster on ports 8091 for the primary and 8092 for the secondary, and postgres database.
+The tmplate is available for modification using 'alfred templates --haBuild'
 
 ## Adding loggers to the logback.xml file
 

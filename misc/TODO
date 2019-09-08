@@ -10,7 +10,6 @@ support for server names
 make the binary store encrypted passwords don't cause issue when splitting the '=' character they might contain - find a way to split only by the first '=' char
 See to the standalone xml parameter
 Make the path to server an argument without flag
-shelljs exec commands
 Make one script that run shell commands
 Add switch name from the default artifactory-pro-version to a custom one by manipulating the entry name from the zip
 Fix the upgrade change the server.xml back to default
@@ -22,7 +21,4 @@ Check if the appenders can stay without the loggers or remove them
 create alfred logback show to show the loggers and appenders in the logback.xml file
 Make alfred info
 Make one url to alfred tools repository
-Use the find-process module to determine whether the port you want to start artifactory on is available or not
-Use shelljs to find if the artifactory process that runs belongs to the same directory
-add description to commands
 Alfred bs remove -- provider

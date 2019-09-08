@@ -5,6 +5,7 @@ program
     .version(pkg.version)
     .description('Manage Artifactory HA configurations')
     .command('set', 'set an artifactory server as HA')
+    .command('build', 'Build HA cluster')
     .parse(process.argv)
 
 if(!process.argv.slice(2).length){
