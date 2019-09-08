@@ -77,6 +77,5 @@ function haTemplates() {
 }
 
 function haBuild() {
-    var lines = haManager.getTemplate()
-    lines.forEach(line => ls.log(line))
+    ls.log(haManager.getTemplate())
 }
