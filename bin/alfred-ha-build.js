@@ -7,7 +7,7 @@ const sh = require('shelljs')
 
 program
     .version(pkg.version)
-    .description('Build basic two node artifactory cluster on port 8091 and 8092 respectively and postgresql database. Docker engine running is required.\nThe template used is a shell script available to customize with pre-ready commands for binary store and database templates aswell.\nRun alfred templates --haBuild to get it.')
+    .description('Build basic two node artifactory cluster on ports 8091 and 8092 respectively and postgresql database. Docker engine running is required.\nThe template used is a shell script available to customize with pre-ready commands for binary store and database templates aswell.\nRun alfred templates --haBuild to get it.')
     .option('-v, --artVersion <artVersion>', 'The Artifactory cluster version to deploy')
     .action(async () => {
         path = pathParser.parse(program.path)

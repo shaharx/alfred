@@ -8,10 +8,10 @@ const find = require('find-process')
 
 program
     .version(pkg.version)
-    .description('Stop Artifactory')
-    .option('-p, --path [path]', 'run the command on the current directory instead of the default server. Should be run from Artifactory home directory', '')
-    .action(async () => {
-        path = pathParser.parse(program.path)
+    .description('Stop Artifactory, unlike other commands, start and stop do not need a -p flag but only the path to artifactory home')
+    .arguments('[path]')
+    .action(async (path) => {
+        path = pathParser.parse(path)
         var processes = await find('name', 'java')
         var stop = false
         processes.forEach(proc => {

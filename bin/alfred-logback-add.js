@@ -5,13 +5,19 @@ const lbmanager = require('../lib/logback-manager')
 
 program
     .version(pkg.version)
-    .option('-n, --name <logger_name>', 'the Artifactory version to deploy')
-    .option('-p, --path [path]', 'the path to deploy Artifactory to. current working directory by default')
-    .option('-i, --index <index>', 'the logger index that will be prompted in case of logger duplicates')
+    .option('-p, --path [path]', 'the path to the logback.xml')
+    .option('-n, --name <logger_name>', 'the name of the logger to add')
     .option('-l, --level <level>', 'set log level')
+    .option('-a, --appenderName <appender>', 'the name of the appender to write the log to')
     .action(() => {
         newPath = pathParser.parse(program.path)
-        lbmanager.addLogger(newPath, program.name, program.index, program.level)
+        var options = {
+            path: newPath,
+            name: program.name,
+            level: program.level,
+            appenderName: program.appenderName
+        }
+        lbmanager.addLogger(options)
     })
 
 if (!process.argv.slice(2).length) {

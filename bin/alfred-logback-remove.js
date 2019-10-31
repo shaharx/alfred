@@ -6,12 +6,15 @@ const lbmanager = require('../lib/logback-manager')
 program
     .version(pkg.version)
     .description('Remove a logger from the logaback.xml file')
-    .option('-n, --name <logger_name>', 'the Artifactory version to deploy')
-    .option('-p, --path [path]', 'the path to deploy Artifactory to. current working directory by default')
-    .option('-i, --index <index>', 'the logger index that will be prompted in case of logger duplicates')
+    .option('-p, --path [path]', 'the path to the logback.xml file')
+    .option('-n, --name <logger_name>', 'the logger name to remove')
     .action(() => {
         newPath = pathParser.parse(program.path)
-        lbmanager.removeLogger(newPath, program.name, program.index)
+        var options = {
+            path: newPath,
+            name: program.name
+        }
+        lbmanager.removeLogger(options)
     })
 
 if (!process.argv.slice(2).length) {

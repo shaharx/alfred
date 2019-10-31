@@ -13,7 +13,7 @@ program
         path = pathParser.parse(program.path)
         var options = {
             path: path,
-            loggerName: program.name,
+            name: program.name,
             level: program.level
         }
         newPath = pathParser.parse(program.path)

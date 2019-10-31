@@ -79,6 +79,25 @@ alfred templates
 The templates command will print the tmplates for all the different configurations module.
 The results can be filtered using the module name as a flag i.e. --bs --ha --db etc...
 
+## Setting up Artifactory as HA node
+
+In order to set up Artifactory as HA node, the following command needs to be run:
+
+```
+alfred ha set -o "node.id=art1 context.url=http://localhost:8081/artifactory/ membership.port=0 primary=true"
+```
+This will set up the ha-node.properties file in the etc directory. Values can be changed accordignly.
+
+## Setting up 2 Nodes HA cluster
+
+In order to fast setup a 2 nodes HA cluster run
+```
+alfred ha build -v x.x.x
+```
+Where x.x.x is the desired Artifactory version.
+This will setup the cluster on ports 8091 for the primary and 8092 for the secondary, and postgres database.
+The tmplate is available for modification using 'alfred templates --haBuild'
+
 ## Connect to external database
 
 To set up an external database, the following command needs to be run:
@@ -144,43 +163,14 @@ The whole argument needs to be enclosed with double quotes, each key value pair 
 If the provider already contains the corresponding key, the value of that key will be modified.
 If the provider does not exist under the chain template, it will be created automatically.
 
-## Setting up artifactory as HA node
-
-In order to set up Artifactory as HA node, the following command needs to be run:
-
-```
-alfred ha set -o "node.id=art1 context.url=http://localhost:8081/artifactory/ membership.port=0 primary=true"
-```
-This will set up the ha-node.properties file in the etc directory. Values can be changed accordignly.
-
-## Setting up 2 Nodes HA setup
-
-In order to fast setup a 2 nodes HA cluster run
-```
-alfred ha build -v x.x.x
-```
-Where x.x.x is the desired Artifactory version.
-This will setup the cluster on ports 8091 for the primary and 8092 for the secondary, and postgres database.
-The tmplate is available for modification using 'alfred templates --haBuild'
-
 ## Adding loggers to the logback.xml file
 
 Using the logback command, the logback.xml file can be modified with loggers of choice.
-If the logger has an apprender-ref key configured, alfred will add the corresponding appender aswell.
-Alfred checks 
-In order to add loggers, the logback library first needs to be downloaded using
-
+To add a logger just run the following command
 ```
-alfred logback download -n <username> -p <password>
+alfred logback add -n <logger_name> -l <log_level> -a <appender_name_of_your_choice>
 ```
-Then, in order to add loggers, the logger name needs to be specified the -n <logger_name> flag
-```
-alfred logback add -n org.apache.http
-alfred logback add -n org.jfrog.storage.JdbcHelper -p artifactory-pro-6.11.6/
-```
-For your convenience, you can run the 'alfred logback list' to view all the available logger in the logback library snippet
-When setting a logger, alfred will look for it in ${alfredHome}/tools/logback-snippets under the loggers directory or under the appenders directory if one is needed.
-Until the loggers bundle will be available, the loggers need to be added to those directories manually under a file for each logger/appender snippet in the corresponding folder with a .xml extension
+The appender -a flag is optional and if not specified, the logger will write to the artifactory.log by default
 
 ## Setting custom ports
 Using the port command, the current ports can be changed as follows:

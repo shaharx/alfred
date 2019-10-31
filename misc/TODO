@@ -9,7 +9,6 @@ limit the connections retry to the databases
 support for server names
 make the binary store encrypted passwords don't cause issue when splitting the '=' character they might contain - find a way to split only by the first '=' char
 See to the standalone xml parameter
-Make the path to server an argument without flag
 Make one script that run shell commands
 Add switch name from the default artifactory-pro-version to a custom one by manipulating the entry name from the zip
 Fix the upgrade change the server.xml back to default
@@ -22,3 +21,4 @@ create alfred logback show to show the loggers and appenders in the logback.xml 
 Make alfred info
 Make one url to alfred tools repository
 Alfred bs remove -- provider
+Test cli-progress or progress to make the download progress more beautiful
