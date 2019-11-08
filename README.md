@@ -164,13 +164,22 @@ If the provider already contains the corresponding key, the value of that key wi
 If the provider does not exist under the chain template, it will be created automatically.
 
 ## Adding loggers to the logback.xml file
-
 Using the logback command, the logback.xml file can be modified with loggers of choice.
-To add a logger just run the following command
+To add a logger just run the following command:
 ```
 alfred logback add -n <logger_name> -l <log_level> -a <appender_name_of_your_choice>
 ```
 The appender -a flag is optional and if not specified, the logger will write to the artifactory.log by default
+
+Removing a logger is quite simple and is done as follows:
+```
+alfred logback remove -n <logger_name>
+```
+alfred currently does not remove the appender that's added along with the logger
+in order to change the log level of a logger, run the following command:
+```
+alfred logback level -n <logger_name> -l <log_level>
+```
 
 ## Setting custom ports
 Using the port command, the current ports can be changed as follows:
